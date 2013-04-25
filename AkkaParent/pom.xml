@@ -12,7 +12,7 @@
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<scala.version>2.10.0</scala.version>
+		<scala.version>2.10.1</scala.version>
 		<scala.postfix.version>2.10</scala.postfix.version> <!-- Aca publica como 2.10, no como 2.10.0, duplico la variable por ese motivo -->
 		<java.version>1.7</java.version>
 		<scala.plugin.version>2.15.2</scala.plugin.version>
@@ -40,10 +40,11 @@
 		<dependency>
 			<groupId>com.typesafe.akka</groupId>
 			<artifactId>akka-actor_${scala.postfix.version}</artifactId>
-			<version>2.1.0</version>
+			<version>2.1.2</version>
 		</dependency>
 
 	</dependencies>
+	<!-- 
 	<repositories>
 		<repository>
 			<id>typesafe</id>
@@ -51,6 +52,7 @@
 			<url>http://repo.typesafe.com/typesafe/releases/</url>
 		</repository>
 	</repositories>
+	-->
 	<build>
 		<sourceDirectory>src/main/scala</sourceDirectory>
 		<testSourceDirectory>src/test/scala</testSourceDirectory>
