@@ -1,14 +1,13 @@
 package akka.first.app.scala.actors
-import java.util.ArrayList
-import java.util.StringTokenizer
 
-import akka.actor.actorRef2Scala
+import scala.collection.mutable.ArrayBuffer
+
 import akka.actor.Actor
-import akka.actor.ActorRef
+import akka.actor.actorRef2Scala
 import akka.first.app.scala.MapData
-import akka.first.app.scala.Word
+import akka.first.app.scala.WordCount
 
-class MapActor(reduceActor: ActorRef) extends Actor {
+class MapActor extends Actor {
 
   val STOP_WORDS_LIST = List("a", "am", "an", "and", "are", "as", "at", "be",
     "do", "go", "if", "in", "is", "it", "of", "on", "the", "to")
@@ -17,17 +16,16 @@ class MapActor(reduceActor: ActorRef) extends Actor {
 
   def receive: Receive = {
     case message: String =>
-      reduceActor ! evaluateExpression(message)
+      sender ! evaluateExpression(message)
   }
-  def evaluateExpression(line: String): MapData = {
-    var dataList = new ArrayList[Word]
-    var parser: StringTokenizer = new StringTokenizer(line)
-    while (parser.hasMoreTokens()) {
-      var word: String = parser.nextToken().toLowerCase()
-      if (!STOP_WORDS_LIST.contains(word)) {
-        dataList.add(new Word(word, defaultCount))
-      }
+  def evaluateExpression(line: String): MapData = MapData {
+    line.split("""\s+""").foldLeft(ArrayBuffer.empty[WordCount]) {
+      (index, word) =>
+        if (!STOP_WORDS_LIST.contains(word.toLowerCase))
+          index += WordCount(word.toLowerCase, 1)
+        else
+          index
     }
-    return new MapData(dataList)
   }
+
 }

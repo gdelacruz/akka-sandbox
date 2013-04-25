@@ -1,34 +1,31 @@
 package akka.first.app.scala.actors
 
-import java.util.HashMap
-
-import scala.collection.JavaConversions.asScalaSet
+import scala.collection.immutable.Map
+import scala.collection.mutable.HashMap
 
 import akka.actor.Actor
+import akka.actor.actorRef2Scala
 import akka.first.app.scala.ReduceData
 import akka.first.app.scala.Result
 
 class AggregateActor extends Actor {
 
-	var finalReducedMap = new HashMap[String, Integer]
+  val finalReducedMap = new HashMap[String, Int]
 
-	def receive: Receive = {
-		case message: ReduceData =>
-			aggregateInMemoryReduce(message.reduceDataMap)
-		case message: Result =>
-			System.out.println(finalReducedMap.toString())
-	}
+  def receive: Receive = {
+    case ReduceData(reduceDataMap) =>
+      aggregateInMemoryReduce(reduceDataMap)
+    case message: Result =>
+      sender ! finalReducedMap.toString
+  }
 
-	def aggregateInMemoryReduce(reducedList: HashMap[String, Integer]) {
-		var count: Integer = 0
-		for (key <- reducedList.keySet) {
-			if (finalReducedMap.containsKey(key)) {
-				count = reducedList.get(key)
-				count += finalReducedMap.get(key)
-				finalReducedMap.put(key, count)
-			} else {
-				finalReducedMap.put(key, reducedList.get(key))
-			}
-		}
-	}
+  def aggregateInMemoryReduce(reducedList: Map[String, Int]): Unit = {
+    for ((key, value) <- reducedList) {
+      if (finalReducedMap contains key)
+        finalReducedMap(key) = (value + finalReducedMap.get(key).get)
+      else
+        finalReducedMap += (key -> value)
+    }
+  }
+
 }

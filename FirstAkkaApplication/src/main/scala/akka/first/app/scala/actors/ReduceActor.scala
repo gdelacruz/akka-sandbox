@@ -1,34 +1,28 @@
 package akka.first.app.scala.actors
-import java.util.ArrayList
-import java.util.HashMap
 
-import scala.collection.JavaConversions.asScalaBuffer
+import scala.collection.immutable.Map
 
-import akka.actor.actorRef2Scala
 import akka.actor.Actor
-import akka.actor.ActorRef
+import akka.actor.actorRef2Scala
 import akka.first.app.scala.MapData
 import akka.first.app.scala.ReduceData
-import akka.first.app.scala.Word
+import akka.first.app.scala.WordCount
 
-class ReduceActor(aggregateActor: ActorRef) extends Actor {
+class ReduceActor extends Actor {
 
   val defaultCount: Int = 1
   def receive: Receive = {
-    case message: MapData =>
-      aggregateActor ! reduce(message.dataList)
+    case MapData(dataList) =>
+      sender ! reduce(dataList)
   }
 
-  def reduce(dataList: ArrayList[Word]): ReduceData = {
-    var reducedMap = new HashMap[String, Integer]
-    for (wc: Word <- dataList) {
-      var word: String = wc.word
-      if (reducedMap.containsKey(word)) {
-        reducedMap.put(word, reducedMap.get(word) + defaultCount)
-      } else {
-        reducedMap.put(word, defaultCount)
-      }
+  def reduce(words: IndexedSeq[WordCount]): ReduceData = ReduceData {
+    words.foldLeft(Map.empty[String, Int]) { (index, words) =>
+      if (index contains words.word)
+        index + (words.word -> (index.get(words.word).get + 1))
+      else
+        index + (words.word -> 1)
     }
-    return new ReduceData(reducedMap)
   }
+
 }
