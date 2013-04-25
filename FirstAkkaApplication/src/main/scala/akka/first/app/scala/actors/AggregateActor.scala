@@ -21,7 +21,7 @@ class AggregateActor extends Actor {
 
 	def aggregateInMemoryReduce(reducedList: HashMap[String, Integer]) {
 		var count: Integer = 0
-		for (val key <- reducedList.keySet) {
+		for (key <- reducedList.keySet) {
 			if (finalReducedMap.containsKey(key)) {
 				count = reducedList.get(key)
 				count += finalReducedMap.get(key)
