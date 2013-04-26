@@ -5,10 +5,10 @@ import akka.actor.ActorRef
 import akka.actor.ActorSystem
 import akka.actor.TypedActor
 import akka.actor.TypedProps
-import akka.dispatch.Await
+import scala.concurrent.Await
 import akka.pattern.ask
 import akka.util.Timeout
-import akka.util.duration._
+import scala.concurrent.duration._
 
 object CalculatorActorSystem {
   def main(args: Array[String]): Unit = {
@@ -27,7 +27,7 @@ object CalculatorActorSystem {
     Thread.sleep(500)
 
     // Invoke the method and wait for result
-    implicit val timeout = Timeout(5 seconds)
+    implicit val timeout = Timeout(5.seconds)
     val future = (calActor ? 10).mapTo[Integer] // enabled by the “ask” import
     val result = Await.result(future, timeout.duration)
 

@@ -27,7 +27,7 @@ object CalculatorActorSystem {
     val router = _system.actorOf(new Props().withRouter(
       BroadcastRouter(routees = routees)))
 
-    router.tell("Hello there")
+    router ! "Hello there"
 
     _system.shutdown()
   }

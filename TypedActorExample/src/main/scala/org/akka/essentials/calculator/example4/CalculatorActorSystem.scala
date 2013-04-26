@@ -3,9 +3,9 @@ package org.akka.essentials.calculator.example4
 import org.akka.essentials.calculator._
 import akka.actor.ActorSystem
 import akka.actor.TypedActor
-import akka.dispatch.Await
-import akka.dispatch.Future
-import akka.util.duration._
+import scala.concurrent.Await
+import scala.concurrent.Future
+import scala.concurrent.duration._
 import akka.actor.TypedProps
 import akka.actor.ActorRef
 import com.typesafe.config.ConfigFactory
@@ -23,7 +23,7 @@ object CalculatorActorSystem {
 
     // Invoke the method and wait for result
     val future = calculator.add(14, 6)
-    var result = Await.result(future, 5 second)
+    var result = Await.result(future, 5.second)
     println("Result is " + result)
 
     // Invoke the method and wait for result
@@ -36,7 +36,7 @@ object CalculatorActorSystem {
     // Get access to the ActorRef
     val calActor: ActorRef = TypedActor(_system).getActorRefFor(calculator)
     // call actor with a message
-    calActor.tell("Hi there")
+    calActor ! "Hi there"
 
     _system.shutdown()
   }

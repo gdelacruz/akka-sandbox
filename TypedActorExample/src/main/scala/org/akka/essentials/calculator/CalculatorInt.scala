@@ -1,5 +1,5 @@
 package org.akka.essentials.calculator
-import akka.dispatch.Future
+import scala.concurrent.Future
 import akka.actor.TypedActor.Receiver
 import akka.actor.TypedActor.PreStart
 import akka.actor.TypedActor.Supervisor

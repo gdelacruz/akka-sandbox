@@ -11,10 +11,10 @@ import akka.actor.OneForOneStrategy
 import akka.actor.Props
 import akka.actor.SupervisorStrategy
 import akka.actor.TypedActor
-import akka.dispatch.Future
-import akka.dispatch.Promise
+import scala.concurrent.Future
+import scala.concurrent.Promise
 import akka.event.Logging
-import akka.util.duration.intToDurationInt
+import scala.concurrent.duration._
 
 class SupervisorActor extends CalculatorInt with PreStart with PostStop with Supervisor {
 
@@ -27,10 +27,10 @@ class SupervisorActor extends CalculatorInt with PreStart with PostStop with Sup
 
 
   // Non blocking request response
-  def add(first: Int, second: Int): Future[Int] = Promise successful first + second
+  def add(first: Int, second: Int): Future[Int] = Future successful first + second
 
   // Non blocking request response
-  def subtract(first: Int, second: Int): Future[Int] = Promise successful first - second
+  def subtract(first: Int, second: Int): Future[Int] = Future successful first - second
 
   // fire and forget
   def incrementCount(): Unit = counter += 1
@@ -56,7 +56,7 @@ class SupervisorActor extends CalculatorInt with PreStart with PostStop with Sup
     log.info("Actor Stopped")
   }
 
-  def supervisorStrategy(): SupervisorStrategy = OneForOneStrategy(maxNrOfRetries = 10, withinTimeRange = 10 seconds) {
+  def supervisorStrategy(): SupervisorStrategy = OneForOneStrategy(maxNrOfRetries = 10, withinTimeRange = 10.seconds) {
     case _: ArithmeticException => Resume
     case _: IllegalArgumentException => Restart
     case _: NullPointerException => Stop
