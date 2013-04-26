@@ -11,6 +11,6 @@ class RandomTimeActor extends Actor with ActorLogging{
       val sleepTime = randomGenerator.nextInt(5)
       log.info("Actor # {} will return in {}", self.path.name, sleepTime)
       TimeUnit.SECONDS.sleep(sleepTime);
-      sender.tell("Message from Actor #" + self.path)
+      sender ! "Message from Actor #" + self.path
   }
 }

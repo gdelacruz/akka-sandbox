@@ -5,7 +5,7 @@ import akka.actor.ActorRef
 import akka.actor.ActorSystem
 import akka.actor.Address
 import akka.routing.RandomRouter
-import akka.routing.RemoteRouterConfig
+import akka.remote.routing.RemoteRouterConfig
 import akka.actor.Props
 
 object Example2 {

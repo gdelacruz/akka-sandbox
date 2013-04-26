@@ -17,8 +17,8 @@ class BurstyMessageRouter(noOfInstances: Int, messageBurst: Int) extends RouterC
 	def routerDispatcher: String = Dispatchers.DefaultDispatcherId
 	def supervisorStrategy: SupervisorStrategy = SupervisorStrategy.defaultStrategy
 
-	def createRoute(props: Props, routeeProvider: RouteeProvider): Route = {
-		routeeProvider.createAndRegisterRoutees(props, noOfInstances, Nil)
+	def createRoute(routeeProvider: RouteeProvider): Route = {
+		routeeProvider.createRoutees(noOfInstances)
 
 		{
 			case (sender, message) =>
