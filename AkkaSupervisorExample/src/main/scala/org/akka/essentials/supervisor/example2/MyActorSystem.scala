@@ -2,17 +2,17 @@ package org.akka.essentials.supervisor.example2
 import akka.actor.ActorSystem
 import akka.actor.Props
 import akka.pattern.ask
-import akka.util.duration._
-import akka.dispatch.Await
+import scala.concurrent.duration._
+import scala.concurrent.Await
 import akka.util.Timeout
 import akka.actor.ActorLogging
 import akka.actor.Actor
 import akka.actor.OneForOneStrategy
-import akka.dispatch.Future
+import scala.concurrent.Future
 import akka.actor.SupervisorStrategy._
 import akka.actor.ActorRef
 
-case class Result
+case class Result()
 
 object MyActorSystem {
   
@@ -27,7 +27,7 @@ object MyActorSystem {
     var mesg: Int = 8
     supervisor ! mesg
 
-    implicit val timeout = Timeout(5 seconds)
+    implicit val timeout = Timeout(5.seconds)
     var future = (supervisor ? new Result).mapTo[Int]
     var result = Await.result(future, timeout.duration)
 

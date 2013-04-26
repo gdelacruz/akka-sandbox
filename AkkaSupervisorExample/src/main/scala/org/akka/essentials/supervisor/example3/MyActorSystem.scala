@@ -2,18 +2,18 @@ package org.akka.essentials.supervisor.example3
 import akka.actor.ActorSystem
 import akka.actor.Props
 import akka.pattern.ask
-import akka.util.duration._
-import akka.dispatch.Await
+import scala.concurrent.duration._
+import scala.concurrent.Await
 import akka.util.Timeout
 import akka.actor.ActorLogging
 import akka.actor.Actor
 import akka.actor.OneForOneStrategy
-import akka.dispatch.Future
+import scala.concurrent.Future
 import akka.actor.SupervisorStrategy._
 import akka.actor.ActorRef
 
-case class Result
-case class DeadWorker
+case class Result()
+case class DeadWorker()
 case class RegisterWorker(val worker: ActorRef, val supervisor: ActorRef)
 
 object MyActorSystem {
