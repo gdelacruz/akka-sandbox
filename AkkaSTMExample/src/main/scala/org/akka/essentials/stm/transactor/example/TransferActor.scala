@@ -1,13 +1,16 @@
 package org.akka.essentials.stm.transactor.example
-import scala.concurrent.stm.Ref
 
-import akka.actor.SupervisorStrategy._
+import scala.concurrent.duration.DurationInt
+
 import akka.actor.Actor
 import akka.actor.AllForOneStrategy
 import akka.actor.Props
+import akka.actor.SupervisorStrategy.Escalate
+import akka.actor.SupervisorStrategy.Resume
+import akka.actor.SupervisorStrategy.Stop
+import akka.actor.actorRef2Scala
 import akka.transactor.Coordinated
 import akka.transactor.CoordinatedTransactionException
-import akka.util.duration._
 import akka.util.Timeout
 
 class TransferActor extends Actor {

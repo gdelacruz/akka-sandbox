@@ -1,7 +1,5 @@
 package org.akka.essentials.stm.pingpong.example3
 
-import scala.concurrent.stm.Ref
-import scala.concurrent.ops._
 import akka.actor.ActorSystem
 import akka.agent.Agent
 
