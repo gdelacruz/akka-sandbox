@@ -1,11 +1,12 @@
 package org.akka.essentials.supervisor.example1
 
-import akka.actor.actorRef2Scala
+import scala.concurrent.Await
+import scala.concurrent.duration.DurationInt
+
 import akka.actor.ActorSystem
 import akka.actor.Props
-import scala.concurrent.Await
+import akka.actor.actorRef2Scala
 import akka.pattern.ask
-import scala.concurrent.duration._
 import akka.util.Timeout
 
 case class Result()
