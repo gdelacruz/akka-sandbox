@@ -16,6 +16,6 @@ class MySerializer extends Serializer {
   // into the optionally provided classLoader.
   def fromBinary(bytes: Array[Byte],
     clazz: Option[Class[_]]): AnyRef = {
-    gson.fromJson(new String(bytes), clazz.toList.first)
+    gson.fromJson(new String(bytes), clazz.toList.head)
   }
 }
