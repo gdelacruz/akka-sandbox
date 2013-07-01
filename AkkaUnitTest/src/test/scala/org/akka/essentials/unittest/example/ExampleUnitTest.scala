@@ -107,7 +107,7 @@ class ExampleUnitTest(_system: ActorSystem) extends TestKit(_system) with Implic
       probe.watch(child)
 
       child.tell("do something")
-      probe.expectMsg(Terminated(child))
+      probe.expectMsgType[Terminated].actor must be(child)
 
     }
   }
