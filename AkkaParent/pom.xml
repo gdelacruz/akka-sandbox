@@ -90,7 +90,7 @@
 					</execution>
 				</executions>
 				<configuration>
-					<scalaVersion>${scala.version}.0</scalaVersion>
+					<scalaVersion>${scala.version}</scalaVersion>
 				</configuration>
 			</plugin>
 			<plugin>
