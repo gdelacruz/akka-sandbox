@@ -4,16 +4,16 @@ import akka.actor.ActorLogging
 import akka.actor.Address
 import akka.actor.Deploy
 import akka.actor.Props
-import akka.dispatch.Await
 import akka.pattern.ask
 import akka.remote.RemoteScope
-import akka.util.duration.intToDurationInt
+import scala.concurrent.duration.DurationInt
 import akka.util.Timeout
+import scala.concurrent.Await
 
 class LocalActor extends Actor with ActorLogging {
 
   //Get a reference to the remote actor
-  val remoteActor = context.actorFor("akka://RemoteNodeApp@10.101.161.20:2552/user/remoteActor")
+  val remoteActor = context.actorFor("akka://RemoteNodeApp@10.20.108.237:2552/user/remoteActor")
   implicit val timeout = Timeout(5 seconds)
   def receive: Receive = {
     case message: String =>
