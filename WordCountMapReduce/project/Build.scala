@@ -9,7 +9,7 @@ object WorldCountMapReduce extends Build {
   val ScalaVersion = "2.10.1"
  
   lazy val sample = Project(
-    id = "main-sample",
+    id = "WordCountMapReduce",
     base = file("."),
     settings = defaultSettings ++ Seq(
       libraryDependencies ++= Dependencies.tracedAkka,

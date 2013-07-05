@@ -1,12 +1,13 @@
 package org.akka.essentials.grid.worker
+
 import org.akka.essentials.grid.controller.ENOUGH
 import org.akka.essentials.grid.controller.STOP
 import org.akka.essentials.grid.controller.Task
 import org.akka.essentials.grid.controller.TaskFinished
 
-import akka.actor.actorRef2Scala
 import akka.actor.Actor
 import akka.actor.ActorLogging
+import akka.actor.actorRef2Scala
 
 /*
  * the message processed counter gets reset when the grid controller starts and stops 

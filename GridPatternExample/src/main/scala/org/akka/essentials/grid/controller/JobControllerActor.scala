@@ -1,9 +1,7 @@
 package org.akka.essentials.grid.controller
+
 import scala.collection.immutable.HashMap
 
-import org.akka.essentials.grid.controller.StartWorker
-import org.akka.essentials.grid.controller.StopWorker
-import org.akka.essentials.grid.controller.TaskFinished
 import org.akka.essentials.grid.worker.WorkerActor
 
 import akka.actor.Actor
@@ -12,7 +10,8 @@ import akka.actor.ActorRef
 import akka.actor.Address
 import akka.actor.AddressFromURIString
 import akka.actor.Props
-import akka.routing.RemoteRouterConfig
+import akka.actor.actorRef2Scala
+import akka.remote.routing.RemoteRouterConfig
 import akka.routing.RoundRobinRouter
 
 class JobControllerActor(val workSchedulerActor: ActorRef) extends Actor with ActorLogging {

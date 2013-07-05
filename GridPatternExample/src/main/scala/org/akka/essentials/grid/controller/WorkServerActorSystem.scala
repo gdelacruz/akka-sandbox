@@ -1,5 +1,4 @@
 package org.akka.essentials.grid.controller
-import org.akka.essentials.grid.controller.WorkSchedulerActor
 
 import com.typesafe.config.Config
 import com.typesafe.config.ConfigFactory

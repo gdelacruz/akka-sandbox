@@ -1,7 +1,8 @@
 package org.akka.essentials.grid.controller
-import akka.actor.ActorRef
-import akka.actor.ActorLogging
+
 import akka.actor.Actor
+import akka.actor.ActorLogging
+import akka.actor.ActorRef
 
 class RegisterRemoteWorkerActor(val jobControllerActor: ActorRef) extends Actor with ActorLogging {
   def receive: Receive = {

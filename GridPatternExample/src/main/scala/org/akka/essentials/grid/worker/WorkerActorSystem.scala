@@ -12,7 +12,7 @@ object WorkerActorSystem {
     val argsList = args.toList
 
     // load the configuration
-    val config = ConfigFactory.load().getConfig(argsList.first)
+    val config = ConfigFactory.load().getConfig(argsList.head)
     val system = ActorSystem("WorkerSys", config)
 
     // get the reference to the remote server actor
