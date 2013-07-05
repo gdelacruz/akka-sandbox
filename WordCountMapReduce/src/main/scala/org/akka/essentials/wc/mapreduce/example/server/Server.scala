@@ -23,3 +23,19 @@ class Server extends Bootable {
   }
 }
 
+object Server {
+  def main(args: Array[String]): Unit = {
+
+    val s = new Server
+
+    s.startup
+
+    while(true)()
+
+    s.shutdown
+    
+    
+
+  }
+}
+
